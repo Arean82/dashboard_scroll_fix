@@ -1,0 +1,4 @@
+en:
+  label_auto_shrink: "Auto-shrink column width when too many statuses"
+  label_shrink_width_px: "Shrinked column width (in pixels)"
+  label_shrink_threshold: "Statuses threshold to trigger shrink"

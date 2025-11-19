@@ -1,0 +1,34 @@
+/* dashboard_scroll_fix.css
+ * Enables horizontal scrolling on the dashboard and provides optional auto-shrink behaviour
+ */
+
+/* Wrap the status columns in a scrollable container */
+.rsf-scroll-wrapper {
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Keep columns inline so they form a horizontal row */
+.rsf-scroll-wrapper .dashboard {
+    white-space: nowrap;
+    display: block;
+}
+
+.rsf-scroll-wrapper .dashboard .status-issues,
+.rsf-scroll-wrapper .dashboard .status-column {
+    display: inline-block;
+    vertical-align: top;
+    white-space: normal;
+}
+
+/* Default column width (will be overridden by JS if auto-shrink enabled) */
+.rsf-status-column {
+    min-width: 320px;
+    max-width: 420px;
+}
+
+/* When shrink applied, this class reduces the column width */
+.rsf-shrink .rsf-status-column {
+    min-width: 220px;
+}
