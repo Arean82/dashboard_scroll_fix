@@ -1,42 +1,48 @@
-// dashboard_scroll_fix.js
-// Wait for DOM ready
 (function() {
     function applyScrollFix() {
         try {
-            var dashboard = document.querySelector('.dashboard');
-            if (!dashboard) return;
+            var container = document.querySelector('.issues_container');
+            if (!container) return;
 
-            // Wrap dashboard in a scroll wrapper if not already wrapped
-            if (!dashboard.parentElement.classList.contains('rsf-scroll-wrapper')) {
+            // Remove Redmine forced no-scroll
+            var content = document.querySelector('#content');
+            if (content) content.style.overflow = 'visible';
+
+            // Wrap only once
+            if (!container.parentElement.classList.contains('rsf-scroll-wrapper')) {
                 var wrapper = document.createElement('div');
                 wrapper.className = 'rsf-scroll-wrapper';
-                dashboard.parentNode.insertBefore(wrapper, dashboard);
-                wrapper.appendChild(dashboard);
+                wrapper.style.overflowX = 'auto';
+                wrapper.style.overflowY = 'hidden';
+                wrapper.style.whiteSpace = 'nowrap';
+
+                container.parentNode.insertBefore(wrapper, container);
+                wrapper.appendChild(container);
             }
 
-            // Add a marker class to status columns (some dashboard versions use .status-issues or .status-column)
-            var cols = dashboard.querySelectorAll('.status-issues, .status-column');
-            cols.forEach(function(c) {
-                if (!c.classList.contains('rsf-status-column')) c.classList.add('rsf-status-column');
+            // Mark columns
+            var cols = container.querySelectorAll('.status_column');
+            cols.forEach(function(col) {
+                col.style.display = 'inline-block';
+                col.style.verticalAlign = 'top';
+                col.style.whiteSpace = 'normal';
+                col.classList.add('rsf-status-column');
             });
 
-            // Auto-shrink logic based on settings injected by hook
+            // Auto-shrink logic
             if (window.DashboardScrollFix && window.DashboardScrollFix.autoShrink) {
-                var threshold = parseInt(window.DashboardScrollFix.shrinkThreshold || 8, 10);
+                var threshold = window.DashboardScrollFix.shrinkThreshold || 8;
                 if (cols.length > threshold) {
                     document.documentElement.classList.add('rsf-shrink');
                 } else {
                     document.documentElement.classList.remove('rsf-shrink');
                 }
             }
+
         } catch (e) {
-            console && console.error && console.error('dashboard_scroll_fix error', e);
+            console.error(e);
         }
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyScrollFix);
-    } else {
-        applyScrollFix();
-    }
+    document.addEventListener('DOMContentLoaded', applyScrollFix);
 })();
