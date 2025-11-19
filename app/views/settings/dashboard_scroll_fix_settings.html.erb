@@ -1,16 +1,46 @@
 <fieldset class="box">
-  <legend>Dashboard Scroll Fix settings</legend>
-  <p>
-    <%= check_box_tag 'settings[auto_shrink]', '1', Setting.plugin_dashboard_scroll_fix['auto_shrink'] %>
-    <%= label_tag 'settings[auto_shrink]', 'Auto-shrink column width when too many statuses' %>
-  </p>
-  <p>
-    <label for="settings_shrink_width_px">Shrinked column width (in pixels):</label>
-    <%= text_field_tag 'settings[shrink_width_px]', Setting.plugin_dashboard_scroll_fix['shrink_width_px'] || 220, size: 6 %>
-  </p>
-  <p>
-    <label for="settings_shrink_threshold">Statuses threshold to trigger shrink:</label>
-    <%= text_field_tag 'settings[shrink_threshold]', Setting.plugin_dashboard_scroll_fix['shrink_threshold'] || 8, size: 4 %>
-    <span class="hint">If the dashboard has more than this many statuses, auto-shrink will be applied.</span>
-  </p>
+<legend>Dashboard Scroll Fix Settings</legend>
+
+<p>
+ <%= check_box_tag 'settings[auto_shrink]','1', Setting.plugin_dashboard_scroll_fix['auto_shrink'] %>
+ <%= label_tag 'settings_auto_shrink','Auto-shrink column width when too many statuses' %>
+</p>
+
+<p>
+Shrinked column width (px):
+<%= text_field_tag 'settings[shrink_width_px]', Setting.plugin_dashboard_scroll_fix['shrink_width_px'], size:4 %>
+</p>
+
+<p>
+Statuses threshold:
+<%= text_field_tag 'settings[shrink_threshold]', Setting.plugin_dashboard_scroll_fix['shrink_threshold'], size:4 %>
+</p>
+
+<hr>
+
+<h3>Scroll Bar Display Mode</h3>
+<p>
+<select name="settings[scroll_mode]">
+  <option value="auto" <%= 'selected' if Setting.plugin_dashboard_scroll_fix['scroll_mode']=='auto' %>>Auto – show only when needed</option>
+  <option value="dashboard_only" <%= 'selected' if Setting.plugin_dashboard_scroll_fix['scroll_mode']=='dashboard_only' %>>Inside Dashboard – scroll only status columns</option>
+  <option value="full_width" <%= 'selected' if Setting.plugin_dashboard_scroll_fix['scroll_mode']=='full_width' %>>Full Width – scroll whole content area</option>
+</select>
+</p>
+
+<hr>
+
+<h3>Scroll Bar Size</h3>
+<p>
+<select name="settings[scroll_size_mode]">
+  <option value="auto" <%= 'selected' if Setting.plugin_dashboard_scroll_fix['scroll_size_mode']=='auto' %>>Auto</option>
+  <option value="normal" <%= 'selected' if Setting.plugin_dashboard_scroll_fix['scroll_size_mode']=='normal' %>>Normal</option>
+  <option value="slim" <%= 'selected' if Setting.plugin_dashboard_scroll_fix['scroll_size_mode']=='slim' %>>Slim</option>
+  <option value="large" <%= 'selected' if Setting.plugin_dashboard_scroll_fix['scroll_size_mode']=='large' %>>Large</option>
+  <option value="custom" <%= 'selected' if Setting.plugin_dashboard_scroll_fix['scroll_size_mode']=='custom' %>>Custom</option>
+</select>
+
+Custom (px):
+<%= text_field_tag 'settings[scroll_size_custom]', Setting.plugin_dashboard_scroll_fix['scroll_size_custom'], size:4 %>
+</p>
+
 </fieldset>

@@ -1,26 +1,27 @@
-/* dashboard_scroll_fix.css
- * Enables horizontal scrolling on the dashboard and provides optional auto-shrink behaviour
- */
+#content{overflow:visible!important;}
 
-.rsf-scroll-wrapper {
-    overflow-x: auto !important;
-    overflow-y: hidden;
-    white-space: nowrap;
-    padding-bottom: 10px;
+.rsf-scroll-wrapper{
+  overflow-x:auto!important;
+  overflow-y:hidden;
+  white-space:nowrap;
+  padding-bottom:6px;
 }
 
-.rsf-scroll-wrapper .issues_container {
-    display: inline-block;
-    white-space: nowrap;
+.rsf-scroll-wrapper .issues_container{
+  display:inline-block;
+  white-space:nowrap;
 }
 
-.rsf-status-column {
-    min-width: 320px;
-    max-width: 400px;
-    margin-right: 10px;
-    white-space: normal;
+.rsf-status-column{
+  min-width:320px;
+  max-width:400px;
+  display:inline-block;
+  vertical-align:top;
+  margin-right:12px;
 }
 
-.rsf-shrink .rsf-status-column {
-    min-width: 220px !important;
+.rsf-shrink .rsf-status-column{
+  min-width:220px!important;
 }
+
+/* scrollbar size injected via JS */
