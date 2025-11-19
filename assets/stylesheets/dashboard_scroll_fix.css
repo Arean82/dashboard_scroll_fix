@@ -24,4 +24,16 @@
   min-width:220px!important;
 }
 
+
+
+#dashboard, .issues_container {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  white-space: nowrap !important;
+}
+
+.status_column {
+  display: inline-block !important;
+}
+
 /* scrollbar size injected via JS */

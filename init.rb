@@ -1,5 +1,5 @@
 require 'redmine'
-#require_relative 'lib/dashboard_scroll_fix/hooks'
+require_relative 'lib/dashboard_scroll_fix/hooks'
 
 Redmine::Plugin.register :dashboard_scroll_fix do
   name 'Dashboard Scroll Fix'
