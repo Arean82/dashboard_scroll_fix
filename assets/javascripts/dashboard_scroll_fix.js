@@ -1,53 +1,31 @@
-document.addEventListener('DOMContentLoaded',function(){
+document.addEventListener('DOMContentLoaded', function () {
 
-try{
- let cfg=window.DSFix||{};
- let container=document.querySelector('.issues_container');
- if(!container)return;
+  if (!window.DSFix) return;
 
- let content=document.querySelector('#content');
- if(content)content.style.overflow='visible';
+  var container = document.querySelector('.issues_container');
+  if (!container) return;
 
- if(!container.parentElement.classList.contains('rsf-scroll-wrapper')){
-    let w=document.createElement('div');
-    w.className='rsf-scroll-wrapper';
-    container.parentNode.insertBefore(w,container);
-    w.appendChild(container);
- }
+  var content = document.querySelector('#content');
+  if (content) content.style.overflow = 'visible';
 
- let cols=container.querySelectorAll('.status_column');
- cols.forEach(c=>{
-   c.classList.add('rsf-status-column');
-   c.style.display='inline-block';
-   c.style.whiteSpace='normal';
- });
+  // Wrap issues container
+  if (!container.parentElement.classList.contains('rsf-scroll-wrapper')) {
+    var wrap = document.createElement('div');
+    wrap.className = 'rsf-scroll-wrapper';
+    container.parentNode.insertBefore(wrap, container);
+    wrap.appendChild(container);
+  }
 
- if(cfg.autoShrink && cols.length>cfg.shrinkThreshold){
-   document.documentElement.classList.add('rsf-shrink');
- }else{
-   document.documentElement.classList.remove('rsf-shrink');
- }
+  var cols = container.querySelectorAll('.status_column');
+  cols.forEach(function (c) {
+    c.classList.add('rsf-status-column');
+  });
 
- /* Scroll mode */
- let wrap=container.parentElement;
- if(cfg.scrollMode==='full_width'){
-    wrap.style.display='block';
-    wrap.style.width='100%';
- }else{
-    wrap.style.display='inline-block';
- }
+  // Auto shrink
+  if (window.DSFix.autoShrink && cols.length > window.DSFix.shrinkThreshold) {
+    document.body.classList.add('rsf-shrink');
+  } else {
+    document.body.classList.remove('rsf-shrink');
+  }
 
- /* Scrollbar size */
- let size=null;
- switch(cfg.scrollSizeMode){
-   case 'normal': size='8px';break;
-   case 'slim': size='4px';break;
-   case 'large': size='14px';break;
-   case 'custom': size=cfg.scrollSizeCustom+'px';break;
- }
- if(size){
-   wrap.style.setProperty('--sb-size',size);
-   wrap.style.scrollbarWidth='auto';
- }
-}catch(e){console.error(e);}
 });

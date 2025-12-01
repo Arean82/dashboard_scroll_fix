@@ -11,11 +11,11 @@ Redmine::Plugin.register :dashboard_scroll_fix do
   version '1.0.0'
 
   settings default: {
-      autoShrink: true,
-      shrinkWidth: 220,
-      shrinkThreshold: 8,
-      scrollMode: 'auto',
-      scrollSizeMode: 'auto',
-      scrollSizeCustom: 8
+    'auto_shrink' => true,
+    'shrink_width_px' => 220,
+    'shrink_threshold' => 8,
+    'scroll_mode' => 'auto',
+    'scroll_size_mode' => 'auto',
+    'scroll_size_custom' => '8'
   }, partial: 'settings/dashboard_scroll_fix_settings'
 end
