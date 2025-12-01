@@ -1,35 +1,31 @@
-#content{
+#content {
   overflow: visible !important;
 }
 
-.rsf-scroll-wrapper{
+/* ✅ REAL HORIZONTAL SCROLL CONTAINER */
+.rsf-scroll-wrapper {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto !important;
   overflow-y: hidden;
   white-space: nowrap;
-  padding-bottom: 6px;
+  padding-bottom: 10px;
 }
 
-.rsf-scroll-wrapper .issues_container{
-  display: inline-flex;
-  flex-wrap: nowrap;
+/* ✅ FORCE HORIZONTAL FLOW */
+.rsf-scroll-wrapper .issues_container {
+  display: inline-block;
+  white-space: nowrap;
 }
 
-.rsf-status-column{
+.rsf-status-column {
   min-width: 320px;
-  max-width: 320px;
+  max-width: 400px;
   display: inline-block;
   vertical-align: top;
   margin-right: 12px;
-  white-space: normal;
 }
 
-.rsf-scroll-wrapper.rsf-shrink .rsf-status-column{
+/* ✅ AUTO SHRINK */
+.rsf-shrink .rsf-status-column {
   min-width: 220px !important;
-  max-width: 220px !important;
 }
-
-/* ❗ REMOVE YOUR OLD CONFLICTING RULES COMPLETELY:
-#dashboard, .issues_container {...}
-.status_column {...}
-*/

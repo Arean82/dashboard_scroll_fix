@@ -8,47 +8,41 @@ document.addEventListener('DOMContentLoaded', function () {
   var content = document.querySelector('#content');
   if (content) content.style.overflow = 'visible';
 
-  // Wrap issues container
-  var wrap;
+  // ✅ FORCE WRAP INTO SCROLL CONTAINER
   if (!container.parentElement.classList.contains('rsf-scroll-wrapper')) {
-    wrap = document.createElement('div');
+    var wrap = document.createElement('div');
     wrap.className = 'rsf-scroll-wrapper';
+    wrap.style.width = '100%';
+    wrap.style.overflowX = 'auto';
+    wrap.style.overflowY = 'hidden';
     container.parentNode.insertBefore(wrap, container);
     wrap.appendChild(container);
-  } else {
-    wrap = container.parentElement;
   }
 
+  var wrap = container.parentElement;
+
+  // ✅ FORCE HORIZONTAL LAYOUT
   var cols = container.querySelectorAll('.status_column');
   cols.forEach(function (c) {
     c.classList.add('rsf-status-column');
+    c.style.display = 'inline-block';
+    c.style.verticalAlign = 'top';
   });
 
-  /* -------------------------------
-     ✅ SCROLL MODE HANDLING (FIX)
-  -------------------------------- */
-
-  if (window.DSFix.scrollMode === "dashboard_only") {
-    wrap.style.overflowX = "auto";
-    wrap.style.width = "100%";
-    wrap.style.display = "block";
-  }
-  else if (window.DSFix.scrollMode === "full_width") {
-    wrap.style.overflowX = "visible";
-    container.style.minWidth = "2000px";
-  }
-  else { // auto
-    wrap.style.overflowX = "auto";
-    wrap.style.width = "100%";
-  }
-
-  /* -------------------------------
-     ✅ AUTO SHRINK (FIXED SCOPE)
-  -------------------------------- */
+  // ✅ AUTO SHRINK
   if (window.DSFix.autoShrink && cols.length > window.DSFix.shrinkThreshold) {
-    wrap.classList.add('rsf-shrink');
+    document.body.classList.add('rsf-shrink');
   } else {
-    wrap.classList.remove('rsf-shrink');
+    document.body.classList.remove('rsf-shrink');
+  }
+
+  // ✅ SCROLL MODE LOGIC
+  if (window.DSFix.scrollMode === 'dashboard_only') {
+    wrap.style.maxWidth = '100%';
+  }
+
+  if (window.DSFix.scrollMode === 'full_width') {
+    wrap.style.width = '100vw';
   }
 
 });
