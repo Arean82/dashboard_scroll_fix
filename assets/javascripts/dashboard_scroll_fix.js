@@ -9,11 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
   if (content) content.style.overflow = 'visible';
 
   // Wrap issues container
+  var wrap;
   if (!container.parentElement.classList.contains('rsf-scroll-wrapper')) {
-    var wrap = document.createElement('div');
+    wrap = document.createElement('div');
     wrap.className = 'rsf-scroll-wrapper';
     container.parentNode.insertBefore(wrap, container);
     wrap.appendChild(container);
+  } else {
+    wrap = container.parentElement;
   }
 
   var cols = container.querySelectorAll('.status_column');
@@ -21,11 +24,31 @@ document.addEventListener('DOMContentLoaded', function () {
     c.classList.add('rsf-status-column');
   });
 
-  // Auto shrink
+  /* -------------------------------
+     ✅ SCROLL MODE HANDLING (FIX)
+  -------------------------------- */
+
+  if (window.DSFix.scrollMode === "dashboard_only") {
+    wrap.style.overflowX = "auto";
+    wrap.style.width = "100%";
+    wrap.style.display = "block";
+  }
+  else if (window.DSFix.scrollMode === "full_width") {
+    wrap.style.overflowX = "visible";
+    container.style.minWidth = "2000px";
+  }
+  else { // auto
+    wrap.style.overflowX = "auto";
+    wrap.style.width = "100%";
+  }
+
+  /* -------------------------------
+     ✅ AUTO SHRINK (FIXED SCOPE)
+  -------------------------------- */
   if (window.DSFix.autoShrink && cols.length > window.DSFix.shrinkThreshold) {
-    document.body.classList.add('rsf-shrink');
+    wrap.classList.add('rsf-shrink');
   } else {
-    document.body.classList.remove('rsf-shrink');
+    wrap.classList.remove('rsf-shrink');
   }
 
 });

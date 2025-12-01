@@ -1,39 +1,35 @@
-#content{overflow:visible!important;}
+#content{
+  overflow: visible !important;
+}
 
 .rsf-scroll-wrapper{
-  overflow-x:auto!important;
-  overflow-y:hidden;
-  white-space:nowrap;
-  padding-bottom:6px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-bottom: 6px;
 }
 
 .rsf-scroll-wrapper .issues_container{
-  display:inline-block;
-  white-space:nowrap;
+  display: inline-flex;
+  flex-wrap: nowrap;
 }
 
 .rsf-status-column{
-  min-width:320px;
-  max-width:400px;
-  display:inline-block;
-  vertical-align:top;
-  margin-right:12px;
+  min-width: 320px;
+  max-width: 320px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 12px;
+  white-space: normal;
 }
 
-.rsf-shrink .rsf-status-column{
-  min-width:220px!important;
+.rsf-scroll-wrapper.rsf-shrink .rsf-status-column{
+  min-width: 220px !important;
+  max-width: 220px !important;
 }
 
-
-
-#dashboard, .issues_container {
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  white-space: nowrap !important;
-}
-
-.status_column {
-  display: inline-block !important;
-}
-
-/* scrollbar size injected via JS */
+/* ❗ REMOVE YOUR OLD CONFLICTING RULES COMPLETELY:
+#dashboard, .issues_container {...}
+.status_column {...}
+*/
